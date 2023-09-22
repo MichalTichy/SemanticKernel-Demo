@@ -1,6 +1,6 @@
 ﻿@page "/"
 
-<PageTitle>Chat</PageTitle>
+<PageTitle>Example prompts</PageTitle>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -195,6 +195,10 @@
                     {
                         <div class="due-date">Due: @todo.Due.Value.ToString("g")</div>
                     }
+                    @if (todo.ExpectedDuration != null)
+                    {
+                        <div class="due-date">Est: @((int)todo.ExpectedDuration.Value.TotalMinutes) minutes</div>
+                    }
                     <button @onclick="() => CompleteTodo(todo)" class="complete-btn">Complete</button>
                 }
                 else
@@ -253,5 +257,5 @@
         <textarea @bind="CurrentMessage" rows="3" placeholder="Type a message..."></textarea>
         <button @onclick="async () => await SendMessage()">Send</button>
     </div>
-
 </div>
+<a href="/examples">Examples</a>

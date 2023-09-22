@@ -64,7 +64,7 @@ namespace ToDo.SemanticKernel
 
                 while (plan.HasNextStep)
                 {
-                    UpdateCurrentPlanInfo(plan);
+                    UpdateCurrentPlanInfo(plan); // reporting to the UI
                     plan = await plan.RunNextStepAsync(kernel, contextVariables);
                 }
                 var result = plan.State[plan.Outputs.First()];
@@ -80,7 +80,6 @@ namespace ToDo.SemanticKernel
             {
                 CurrentPlan = null;
                 Running = false;
-
             }
         }
 
