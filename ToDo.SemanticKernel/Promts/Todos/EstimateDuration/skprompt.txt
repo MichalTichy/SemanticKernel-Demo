@@ -1,0 +1,54 @@
+[ESTIMATION RULES]
+Estimate how long can it take to complete todo items based on its description and tags.
+
+To each task add property ExpectedDuration. This property should contain number minutes representing estimate of how long would take to complete given task.
+The estimates should be multiplies of 15 minutes. The final format is hours:minutes:seconds.
+If you don't know how long it would take to complete given task, leave ExpectedDuration property empty.
+[END ESTIMATION RULES]
+
+[EXAMPLE]
+Estimate tasks:
+
+[
+  {
+    "Description": "Take out the trash from the office",
+    "Due": "2023-08-15T08:00:00",
+    "Tags": ["Work", "Office", "Chores"]
+  },
+  {
+    "Description": "Write email to Samuel regarding meeting agenda. Include John in the copy.",
+    "Due": "2023-08-14T17:00:00",
+    "Tags": ["Work", "Communication", "Email"]
+  },
+  {
+    "Description": "Buy beverages for the BBQ.",
+    "Due": "2023-08-20T12:00:00",
+    "Tags": ["Personal", "Groceries"]
+  }
+]
++++++
+[
+  {
+    "Description": "Take out the trash from the office",
+    "Due": "2023-08-15T08:00:00",
+    "Tags": ["Work", "Office", "Chores"],
+    "ExpectedDuration": 00:15:00
+  },
+  {
+    "Description": "Write email to Samuel regarding meeting agenda. Include John in the copy.",
+    "Due": "2023-08-14T17:00:00",
+    "Tags": ["Work", "Communication", "Email"],
+    "ExpectedDuration": 00:30:00
+  },
+  {
+    "Description": "Buy beverages for the BBQ.",
+    "Due": "2023-08-20T12:00:00",
+    "Tags": ["Personal", "Groceries"],
+    "ExpectedExpectedDuration": 00:45:00
+  }
+]
+[END EXAMPLE]
+
+Estimate tasks:
+
+{{$input}}

@@ -1,0 +1,47 @@
+[EXTRACTION RULES]
+Extract ToDo tasks from text. Output them as array of json objects with following properties:
+Description - mandatory text description
+Due - The due date can be missing, should be in iso 8601 format
+Tags - optional list of strings(tags) that can be used to group similar tasks. Prefer general tags like Work, Personal, Communication, Chores, Groceries, etc.
+
+
+[END EXTRACTION RULES]
+
+[EXAMPLE]
+Extract tasks:
+Today is: Monday 14.08.2023 13:00
+
+Hello Peter,
+Please can you take out the trash from the office? I've forgot to do that and it needs to be done before tommorows meating with Samuel at 8:00.
+Also can you please email him the aggenda today, include me in the copy too?
+
+Btw: Don't forget about the BBQ on Sunday. Can you bring some beverages? I'll get the meat.
+
+Thanks
+John
++++++
+[
+  {
+    "Description": "Take out the trash from the office",
+    "Due": "2023-08-15T08:00:00",
+    "Tags": ["Work", "Office", "Chores"]
+  },
+  {
+    "Description": "Write email to Samuel regarding meeting agenda. Include John in the copy.",
+    "Due": "2023-08-14T17:00:00",
+    "Tags": ["Work", "Communication", "Email"]
+  },
+  {
+    "Description": "Buy beverages for the BBQ.",
+    "Due": "2023-08-20T12:00:00",
+    "Tags": ["Personal", "Groceries"]
+  }
+]
+
+[END EXAMPLE]
+Extract tasks:
+Today is: {{$currentDate}}
+
+{{$input}}
+
++++++
