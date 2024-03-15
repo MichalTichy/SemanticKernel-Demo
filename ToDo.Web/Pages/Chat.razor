@@ -226,7 +226,23 @@
                 {
                     <img src="ai.png" alt="User 2" class="profile-pic">
                 }
-                <div class="text">@((MarkupString) message.Text.Replace("\n", "<br />"))</div>
+                <div class="text">
+                    @((MarkupString) message.Text.Replace("\n", "<br />"))
+                    
+                    @if (message.Plan != null)
+                    {
+                        <div>
+                            <b>PLAN:</b>
+                            <div class="plan">
+                                @foreach (var step in message.Plan.Steps)
+                                {
+                                    <span class="step">@step.Name</span>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                
             </div>
         }
 
@@ -238,16 +254,13 @@
                     <div>
                         Thinking ...
                     </div>
-                    @if (Ai.CurrentPlan != null)
-                    {
-                        <b>PLAN:</b>
+                    <b>@(Plan.Steps.Any() ? "PLAN:" : "Creating plan" )</b>
                         <div class="plan">
-                            @foreach (var step in Ai.CurrentPlan.Steps)
+                            @foreach (var step in Plan.Steps)
                             {
-                                <span class="step @(step.IsActive ? "active" : "") @(step.IsDone ? "done" : "")">@step.Name</span>
+                                <span class="step">@step.Name</span>
                             }
                         </div>
-                    }
                 </div>
 
             </div>
@@ -255,7 +268,7 @@
     </div>
     <div class="chat-input">
         <textarea @bind="CurrentMessage" rows="3" placeholder="Type a message..."></textarea>
-        <button @onclick="async () => await SendMessage()">Send</button>
+        <button @onclick="SendMessage">Send</button>
     </div>
 </div>
 <a href="/examples">Examples</a>

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>347d3aea-01c3-4fe8-9bf3-7bea45c8cd62</UserSecretsId>
@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ToDo.SemanticKernel\ToDo.SemanticKernel.csproj" />
+    <PackageReference Include="Microsoft.SemanticKernel.Plugins.Core" Version="1.6.2-alpha" />      
   </ItemGroup>
 
 </Project>

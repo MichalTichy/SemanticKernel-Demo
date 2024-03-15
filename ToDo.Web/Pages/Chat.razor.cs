@@ -3,13 +3,15 @@ using Microsoft.JSInterop;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 using ToDo.SemanticKernel;
+using ToDo.SemanticKernel.ReportingModels;
 using ToDo.Web.Models;
 
 namespace ToDo.Web.Pages
 {
-    public partial class Chat :IDisposable
+    public partial class Chat : IDisposable
     {
-        
+        private readonly CancellationTokenSource pageCancellationTokenSource = new();
+
         [Inject]
         public ToDoAi Ai { get; set; } = null!;
 
@@ -19,14 +21,12 @@ namespace ToDo.Web.Pages
 
         public ICollection<ToDoItem> ToDoItems { get; set; } = new List<ToDoItem>();
 
-
+        public Plan Plan { get; set; } = new(new List<Step>());
 
         public ICollection<Message> Messages { get; set; } = new List<Message>();
         public string? CurrentMessage { get; set; }
 
-        private readonly CancellationTokenSource pageCancellationTokenSource = new();
-        
-        private async Task SendMessage()
+        private void SendMessage()
         {
             //Validation
             if (string.IsNullOrWhiteSpace(CurrentMessage))
@@ -36,17 +36,21 @@ namespace ToDo.Web.Pages
 
 
             //User message handling
-            Messages.Add(new Message(CurrentMessage, true));
-            var message = CurrentMessage;
-            CurrentMessage = null;
-            
-            await ScrollToBottomOfTheChat();
+            Messages.Add(new Message(CurrentMessage, true, null));
 
-            //Response Handling
-            var result = await Ai.Ask(message);
-            Messages.Add(new Message(result, false));
-            
-            await ScrollToBottomOfTheChat();
+            _ = Task.Run(async () =>
+            {
+                var message = CurrentMessage;
+                CurrentMessage = null;
+
+                await ScrollToBottomOfTheChat();
+
+                //Response Handling
+                var result = await Ai.Ask(message);
+                Messages.Add(new Message(result, false, Plan));
+
+                await ScrollToBottomOfTheChat();
+            });
         }
 
         private Task CompleteTodo(ToDoItem todo)
@@ -61,10 +65,12 @@ namespace ToDo.Web.Pages
 
         [Inject]
         private IJSRuntime JsRuntime { get; set; } = null!;
+
         private async Task ScrollToBottomOfTheChat()
         {
             await JsRuntime.InvokeVoidAsync("scrollToBottom");
         }
+
 
         protected override void OnAfterRender(bool firstRender)
         {
@@ -76,11 +82,17 @@ namespace ToDo.Web.Pages
                     while (!cancellationToken.IsCancellationRequested)
                     {
                         LoadTodoItems();
+                        if (Ai.CurrentPlan != null)
+                        {
+                            Plan = Ai.CurrentPlan;
+                        }
+
                         await InvokeAsync(StateHasChanged);
-                        await Task.Delay(250, cancellationToken);
+                        await Task.Delay(100, cancellationToken);
                     }
                 }, cancellationToken);
             }
+
             base.OnAfterRender(firstRender);
         }
 
@@ -96,6 +108,5 @@ namespace ToDo.Web.Pages
         }
 
         #endregion
-
     }
 }

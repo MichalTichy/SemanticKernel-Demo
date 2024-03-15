@@ -7,5 +7,6 @@
         ToDoItem? Get(Guid id);
         void Complete(Guid id);
         void Remove(Guid id);
+        void Clear();
     }
 }

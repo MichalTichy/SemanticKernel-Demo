@@ -11,9 +11,9 @@
                 toDoItem = toDoItem with {Id = Guid.NewGuid()};
             }
             todoItems[toDoItem.Id] = toDoItem;
-		}
+        }
 
-		public ICollection<ToDoItem> GetAll() => todoItems.Values;
+        public ICollection<ToDoItem> GetAll() => todoItems.Values;
 
 		public ToDoItem? Get(Guid id) => todoItems.GetValueOrDefault(id);
 
@@ -24,5 +24,10 @@
 		}
 		
 		public void Remove(Guid id) => todoItems.Remove(id);
-	}
+
+        public void Clear()
+        {
+            todoItems.Clear();
+        }
+    }
 }

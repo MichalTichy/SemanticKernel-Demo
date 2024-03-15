@@ -7,7 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDo.SemanticKernel", "ToDo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDo", "ToDo\ToDo.csproj", "{FD7442C9-2AB8-4CB8-912F-844F3AA043E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDo.Web", "ToDo.Web\ToDo.Web.csproj", "{E18CF93C-9F73-4F32-AF5E-5830EF2F823F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDo.Web", "ToDo.Web\ToDo.Web.csproj", "{E18CF93C-9F73-4F32-AF5E-5830EF2F823F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{4DE3E070-F154-4B97-84E5-8122616A2DFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{9BA57D53-A740-451F-950E-35AE03F9D20D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AI", "AI", "{D7AC43E9-7A3E-4436-94A5-C326816706C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +36,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5ED13C04-3449-49BB-A0AF-BFDC474C94FD} = {D7AC43E9-7A3E-4436-94A5-C326816706C0}
+		{FD7442C9-2AB8-4CB8-912F-844F3AA043E3} = {4DE3E070-F154-4B97-84E5-8122616A2DFA}
+		{E18CF93C-9F73-4F32-AF5E-5830EF2F823F} = {9BA57D53-A740-451F-950E-35AE03F9D20D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1E793BF5-0698-43C2-B114-7C2F8C9FBE7F}
