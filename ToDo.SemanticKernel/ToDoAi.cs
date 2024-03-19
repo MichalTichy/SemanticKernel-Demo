@@ -1,18 +1,15 @@
 ﻿using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel;
-using System.Diagnostics;
-using System.Text.Json.Serialization;
-using Microsoft.SemanticKernel.TemplateEngine;
 using System.Reflection;
 using Microsoft.Extensions.Options;
 using Microsoft.SemanticKernel.ChatCompletion;
 using ToDo.SemanticKernel.ReportingModels;
-using ToDo.SemanticKernel.Skills;
 using Microsoft.SemanticKernel.Planning.Handlebars;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.SemanticKernel.Plugins.Core;
+using ToDo.SemanticKernel.Plugins;
 
 namespace ToDo.SemanticKernel
 {
@@ -42,7 +39,7 @@ namespace ToDo.SemanticKernel
                 .AddFromType<TextPlugin>()
                 .AddFromType<MathPlugin>()
                 .AddFromType<DatePlugin>("date")
-                .AddFromObject(new SaveToDoSkill(toDoService), "saveTodo");
+                .AddFromObject(new SaveToDoPlugin(toDoService), "saveTodo");
 
             builder.Plugins
                 .AddFromPromptDirectory(GetDirectoryWithPrompts("General"))
@@ -87,7 +84,7 @@ namespace ToDo.SemanticKernel
 
         private static string GetDirectoryWithPrompts(string name)
         {
-            return Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Promts", name);
+            return Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!, "Promts", name);
         }
 
         public void UpdateCurrentPlanInfo(HandlebarsPlan plan)
