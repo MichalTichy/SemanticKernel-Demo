@@ -21,7 +21,7 @@ namespace ToDo.Web.Pages
 
         public ICollection<ToDoItem> ToDoItems { get; set; } = new List<ToDoItem>();
 
-        public Plan Plan { get; set; } = new(new List<Step>());
+        public Plan? Plan { get; set; } = new(new List<Step>());
 
         public ICollection<Message> Messages { get; set; } = new List<Message>();
         public string? CurrentMessage { get; set; }
@@ -82,10 +82,7 @@ namespace ToDo.Web.Pages
                     while (!cancellationToken.IsCancellationRequested)
                     {
                         LoadTodoItems();
-                        if (Ai.CurrentPlan != null)
-                        {
-                            Plan = Ai.CurrentPlan;
-                        }
+                        Plan = Ai.CurrentPlan;
 
                         await InvokeAsync(StateHasChanged);
                         await Task.Delay(100, cancellationToken);
