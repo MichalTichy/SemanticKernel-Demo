@@ -38,7 +38,7 @@ namespace ToDo.SemanticKernel
                 .AddFromType<TextPlugin>()
                 .AddFromType<MathPlugin>()
                 .AddFromType<DatePlugin>("date")
-                .AddFromObject(new SaveToDoSkill(toDoService), "saveTodo");
+                .AddFromObject(new SaveToDoPlugin(toDoService), "saveTodo");
 
             builder.Plugins
                 .AddFromPromptDirectory(GetDirectoryWithPrompts("General"))
@@ -83,7 +83,7 @@ namespace ToDo.SemanticKernel
 
         private static string GetDirectoryWithPrompts(string name)
         {
-            return Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Promts", name);
+            return Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!, "Promts", name);
         }
 
         public void UpdateCurrentPlanInfo(HandlebarsPlan plan)

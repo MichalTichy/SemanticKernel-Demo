@@ -254,13 +254,16 @@
                     <div>
                         Thinking ...
                     </div>
-                    <b>@(Plan.Steps.Any() ? "PLAN:" : "Creating plan" )</b>
+                    <b>@(Plan?.Steps != null ? "PLAN:" : "Creating plan" )</b>
+                    @if (Plan != null)
+                    {
                         <div class="plan">
                             @foreach (var step in Plan.Steps)
                             {
                                 <span class="step">@step.Name</span>
                             }
                         </div>
+                    }
                 </div>
 
             </div>

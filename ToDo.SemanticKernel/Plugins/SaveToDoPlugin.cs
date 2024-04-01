@@ -4,10 +4,11 @@ using System.Text.Json;
 
 namespace ToDo.SemanticKernel.Plugins
 {
-    public class SaveToDoSkill(IToDoService toDoService)
+    public class SaveToDoPlugin(IToDoService toDoService)
     {
         [KernelFunction]
-        [Description("Saves ToDo item and returs their names. Should be called as final step when previous step outputs JSON.")]
+        [Description("Saves ToDo item and returs their names." +
+                     "Should be called as final step when previous step outputs JSON.")]
         public string SaveToDo([Description("JSON representation of ToDo item")] string todoJson)
         {
             var toDoItems = JsonSerializer.Deserialize<ICollection<ToDoItem>>(todoJson) ?? Array.Empty<ToDoItem>();
