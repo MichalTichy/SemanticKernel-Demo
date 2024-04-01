@@ -1,18 +1,14 @@
-﻿using Microsoft.Extensions.Azure;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel;
-using System.Diagnostics;
-using System.Text.Json.Serialization;
-using Microsoft.SemanticKernel.TemplateEngine;
 using System.Reflection;
 using Microsoft.Extensions.Options;
 using Microsoft.SemanticKernel.ChatCompletion;
 using ToDo.SemanticKernel.ReportingModels;
-using ToDo.SemanticKernel.Skills;
 using Microsoft.SemanticKernel.Planning.Handlebars;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.SemanticKernel.Plugins.Core;
+using ToDo.SemanticKernel.Plugins;
 
 namespace ToDo.SemanticKernel
 {

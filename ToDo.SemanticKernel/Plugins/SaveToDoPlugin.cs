@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Text.Json;
 
-namespace ToDo.SemanticKernel.Skills
+namespace ToDo.SemanticKernel.Plugins
 {
     public class SaveToDoSkill(IToDoService toDoService)
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.SemanticKernel;
 using System.ComponentModel;
 
-namespace ToDo.SemanticKernel.Skills
+namespace ToDo.SemanticKernel.Plugins
 {
     public class DatePlugin
     {
